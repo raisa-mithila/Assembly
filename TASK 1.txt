@@ -1,0 +1,49 @@
+.MODEL SMALL
+.STACK 100H
+.DATA
+     
+     a db "Please insert a character: $"  
+      b db "DISPLAY NUMBER : $"
+    
+     
+.CODE
+MAIN PROC
+;iniitialize DS
+MOV AX,@DATA
+MOV DS,AX
+;enter your code here
+ 
+ LEA DX,a
+ MOV AH,9
+ INT 21H
+  
+ MOV AH,1    ;1
+ INT 21H   
+ 
+       MOV CL,AL
+ 
+MOV AH, 2 ; display character function
+MOV DL, 0DH ; carriage return
+INT 21h ; execute carriage return
+MOV DL, 0AH ; line feed
+INT 21h ; execute ;NEW LINE  
+
+ LEA DX,b
+ MOV AH,9
+ INT 21H
+         
+         
+          MOV DL,CL
+ MOV AH,2
+ INT 21H ;STORE  
+
+      
+
+
+
+
+;exit to DOS
+MOV AX,4C00H
+INT 21H
+MAIN ENDP
+END MAIN

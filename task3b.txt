@@ -1,0 +1,34 @@
+.MODEL SMALL
+.STACK 100H
+.DATA
+   a db "Enter a uppercase letter: $"
+.CODE
+MAIN PROC
+;iniitialize DS
+MOV AX,@DATA
+MOV DS,AX
+;enter your code here   
+    
+    lea DX,a
+    mov AH,9
+    int 21h
+             
+    ; input 
+    MOV AH, 1
+    INT 21h 
+    MOV bl,al   ;store to bl
+    
+    add bl,20h  ;convert to lower letter
+    
+
+    ; Display lower letter
+    MOV AH, 2
+    MOV DL,bl
+    INT 21h
+           
+             
+;exit to DOS
+MOV AX,4C00H
+INT 21H
+MAIN ENDP
+END MAIN

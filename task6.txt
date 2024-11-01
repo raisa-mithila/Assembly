@@ -1,0 +1,48 @@
+          .MODEL SMALL
+.STACK 100H
+.DATA
+   a db "Enter a Hex digit: $"    
+   b db "In Decimal it is: $"   
+.CODE
+MAIN PROC
+;iniitialize DS
+MOV AX,@DATA
+MOV DS,AX
+;enter your code here   
+    lea DX,a
+    mov AH,9
+    int 21h   
+    
+    ;input
+    mov ah,1
+    int 21h
+    mov bl,al 
+    
+    ;new line
+    mov ah,2
+    mov dl,0dh
+    int 21h
+    mov dl,0ah
+    int 21h
+    
+    lea DX,b
+    mov ah,9
+    int 21h
+    
+    mov ah,2
+    mov dl,31h  ;hex num manually '1' print /49H o likte pari
+    int 21h
+    
+    ;caile 17h sub korte pari 
+    sub bl,11h ;porer digit ta print ar jonno,karon 1 to already print hoye jay
+    
+    
+    mov dl,bl
+    int 21h 
+    
+            
+;exit to DOS
+MOV AX,4C00H
+INT 21H
+MAIN ENDP
+END MAIN

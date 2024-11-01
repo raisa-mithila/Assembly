@@ -1,0 +1,81 @@
+.MODEL SMALL
+.STACK 100H
+.DATA
+   a db "The sum of $"    
+   b db "and $"   
+   c db "is $"
+.CODE
+MAIN PROC
+;iniitialize DS
+MOV AX,@DATA
+MOV DS,AX
+;enter your code here   
+    
+             
+    ; input 
+    MOV AH, 1
+    INT 21h 
+    sub al,30h  
+    
+    MOV bl,al   ;store to bl  
+    
+    mov bh,al   ;ar ekta variable a store karon value 35 hoye jay
+    add bh,30h  ;32 te convert
+    
+    
+    ;intput
+    mov AH,1
+    int 21h  
+    sub al,30h 
+    mov cl,al
+    
+    mov ch,cl   
+    add ch,30h
+    
+    
+    ;;new line
+    mov ah,2;
+    mov dl,0DH
+    int 21H
+    mov dl,0ah
+    int 21h 
+    
+    
+    
+    lea DX,a
+    mov AH,9
+    int 21H
+    
+
+    ; Display 
+    MOV AH, 2
+    MOV DL,bh
+    INT 21h
+           
+    lea DX,b 
+    mov AH,9
+    int 21H 
+    
+    mov ah,2
+    mov dl,ch
+    int 21h
+            
+            
+    lea DX,c
+    mov Ah,9
+    int 21h
+    
+    
+    ;;add
+    add bl,cl
+    add bl,30h 
+    
+    mov ah, 2
+    mov dl, bl
+    int 21h
+            
+;exit to DOS
+MOV AX,4C00H
+INT 21H
+MAIN ENDP
+END MAIN

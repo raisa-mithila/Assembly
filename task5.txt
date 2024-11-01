@@ -1,0 +1,75 @@
+.MODEL SMALL
+.STACK 100H
+.DATA
+   Prompt db "Enter Three Initials: $"    
+
+.CODE
+MAIN PROC
+;iniitialize DS
+MOV AX,@DATA
+MOV DS,AX
+;enter your code here   
+    
+      
+    lea DX,Prompt
+    mov AH,9
+    int 21H
+    
+
+    ; Display 
+    MOV AH, 2
+    MOV DL,bh
+    INT 21h 
+          
+    ; input 
+    MOV AH, 1
+    INT 21h  
+    mov bl,al
+    
+    MOV AH, 1
+    INT 21h 
+    mov bh,al
+    
+    MOV AH, 1
+    INT 21h 
+    mov cl,al
+   
+    
+    ;;new line
+    mov ah,2;
+    mov dl,0DH
+    int 21H
+    mov dl,0ah
+    int 21h  
+    
+    ;store in dl
+    mov dl,bl
+    int 21h
+    
+    mov ah,2
+    mov dl,0DH
+    int 21h
+    mov dl,0ah
+    int 21h
+    
+    
+    ;store in dl
+    mov dl,bh
+    int 21h  
+    
+    mov ah,2
+    mov dl,0dh
+    int 21h
+    mov dl,0ah
+    int 21h
+    
+    ;store in dl
+    mov dl,cl
+    int 21h
+    
+            
+;exit to DOS
+MOV AX,4C00H
+INT 21H
+MAIN ENDP
+END MAIN
